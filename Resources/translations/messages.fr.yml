@@ -1,0 +1,16 @@
+ux_media.delete: 'Supprimer'
+Path: 'Lien :'
+File: 'Fichier'
+Add: 'Ajouter'
+Close: 'Fermer'
+File Manager: Gestionnaire de fichiers
+ux_media.path.placeholder: 'Aucun document'
+ux_media.alt.placeholder: 'Aucune description'
+Apply: Appliquer
+Cancel: Annuler
+'Width:': 'Largeur :'
+'Height:': 'Hauteur :'
+'X:': 'X :'
+'Y:': 'Y :'
+'Ratio:': 'Ratio :'
+Image crop: "Recadrage d'image"

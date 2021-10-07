@@ -1,0 +1,95 @@
+<!-- Modal -->
+<div class="modal fade ux-crop-modal"
+     data-controller="arkounay--ux-media--crop"
+     data-arkounay--ux-media--media-target="cropModal"
+     data-arkounay--ux-media--crop-path-value="{{ form.vars.value }}"
+     data-ratio="{{ crop_options.ratio|default('free') }}"
+     id="crop-modal-{{ form.vars.id }}"
+     tabindex="-1"
+     role="dialog"
+     data-conf="{{ conf }}"
+     data-extra="{{ extra|json_encode }}"
+     aria-labelledby="crop-modal-label"
+>
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ 'Image crop'|trans }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-toolbar pb-3">
+                            <div class="btn-group me-2">
+                                <button class="btn btn-outline-secondary active" data-bs-toggle="button" aria-pressed="true" data-action="arkounay--ux-media--crop#toggleCrop">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-crop m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M8 5v10a1 1 0 0 0 1 1h10"></path>
+                                        <path d="M5 8h10a1 1 0 0 1 1 1v10"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {% if crop_options.allow_rotation %}
+                                <div class="btn-group me-2">
+                                    <button class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#rotateLeft">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#rotateRight">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                            {% if crop_options.allow_flip %}
+                                <div class="btn-group me-2">
+                                    <button class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#flipHorizontal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-horizontal m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <polyline points="7 8 3 12 7 16"></polyline>
+                                            <polyline points="17 8 21 12 17 16"></polyline>
+                                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                                        </svg>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#flipVertical">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-vertical m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <polyline points="8 7 12 3 16 7"></polyline>
+                                            <polyline points="8 17 12 21 16 17"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="21"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if crop_options.display_crop_data %}
+                        <div class="col-md-6">
+                            <div class="float-end image-data py-2 ">
+                                {% for el in ['x', 'y', 'width', 'height'] %}
+                                    <span class="label"> {{ (el ~ ':')|capitalize|trans }} <span data-arkounay--ux-media--crop-target="{{ el }}">0</span></span>
+                                {% endfor %}
+                                {% if crop_options.ratio|default %}
+                                    <span class="label label-primary"> {{ 'Ratio: '|trans ~ crop_options.ratio|round(2) }}  </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="modal-crop-container" data-arkounay--ux-media--crop-target="container"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Cancel'|trans }}</button>
+                <button type="button" class="btn btn-primary" data-action="arkounay--ux-media--crop#save" data-bs-dismiss="modal" data-arkounay--ux-media--crop-target="saveButton" data-crop-url="{{ path('ux_media_ajax_crop') }}">{{ 'Apply'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
