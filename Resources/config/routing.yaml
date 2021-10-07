@@ -1,0 +1,3 @@
+ux_media_media:
+    resource: "@ArkounayUxMediaBundle/Controller/"
+    type:     annotation

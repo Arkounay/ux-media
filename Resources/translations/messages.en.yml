@@ -1,0 +1,8 @@
+ux_media.delete: 'Remove'
+Path: 'Path:'
+File: 'File'
+Add: 'Add'
+Close: 'Close'
+File Manager: 'File Manager'
+ux_media.path.placeholder: 'No document'
+ux_media.alt.placeholder: 'No description'

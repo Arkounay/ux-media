@@ -1,0 +1,16 @@
+{% block ux_media_widget %}
+    {% embed '@ArkounayUxMedia/_ux_media_widget.html.twig' %}{% endembed %}
+{% endblock %}
+
+{% block ux_media_collection_widget %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ux-media-collection')|trim}) %}
+    {{ block('ux_collection_widget') }}
+{% endblock %}
+
+{% block ux_media_row %}
+    <div data-arkounay--ux-collection--collection-target="collectionElement" >
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
+    </div>
+{% endblock %}

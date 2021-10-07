@@ -1,0 +1,17 @@
+services:
+
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    Arkounay\Bundle\UxMediaBundle\Controller\:
+        resource: '../../Controller/*'
+
+    Arkounay\Bundle\UxMediaBundle\Service\FileManagerConfigurationService:
+        tags:
+            - { name: twig.extension }
+        arguments: ['@Artgris\Bundle\FileManagerBundle\Service\FilemanagerService', '@parameter_bag']
+
+    Arkounay\Bundle\UxMediaBundle\Service\UxMediaTwig:
+        tags:
+            - { name: twig.extension }

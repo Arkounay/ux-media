@@ -1,0 +1,62 @@
+{
+    "name": "@arkounay/ux-media",
+    "description": "Symfony UX async document upload type using ArtgrisFileManager",
+    "license": "MIT",
+    "version": "1.0.0",
+    "symfony": {
+        "controllers": {
+            "media": {
+                "main": "dist/media_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager",
+                "enabled": true,
+                "autoimport": {
+                    "@arkounay/ux-media/src/style.css": true
+                }
+            },
+            "upload": {
+                "main": "dist/upload_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager",
+                "enabled": true
+            },
+            "crop": {
+                "main": "dist/crop_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager",
+                "enabled": true,
+                "autoimport": {
+                    "cropperjs/dist/cropper.min.css": true,
+                    "@arkounay/ux-media/src/crop_style.css": true
+                }
+            },
+            "bootstrap_modal": {
+                "main": "dist/bootstrap_modal_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager",
+                "enabled": false,
+                "autoimport": {
+                    "@arkounay/ux-media/src/bootstrap_modal.scss": true
+                }
+            }
+        }
+    },
+    "scripts": {
+        "build": "babel src -d dist",
+        "lint": "eslint src test"
+    },
+    "peerDependencies": {
+        "cropperjs": "^1.5.12",
+        "stimulus": "^2.0.0",
+        "bootstrap": "^5.1.2"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.12.1",
+        "@babel/core": "^7.12.3",
+        "@babel/plugin-proposal-class-properties": "^7.12.1",
+        "@babel/preset-env": "^7.12.7",
+        "cropperjs": "^1.5.12",
+        "stimulus": "^2.0.0",
+        "bootstrap": "^5.1.2"
+    }
+}

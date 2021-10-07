@@ -1,0 +1,17 @@
+.ux-media .img-preview > img {
+    max-width: 200px;
+}
+.ux-media .btn-group.no-crop .btn-upload {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.ux-media-collection .sortable-ghost > div {
+    border: 2px solid #86b7fe !important;
+}
+
+.ux-media-collection .collection-error-message-button {
+    display: inline-flex;
+    align-items: center;
+}
+
