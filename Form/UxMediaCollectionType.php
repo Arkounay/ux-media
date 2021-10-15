@@ -41,7 +41,6 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
             'prototype_data' => null,
             'prototype_name' => '__name__',
             'entry_type' => UxMediaType::class,
-            'entry_options' => [],
             'delete_empty' => false,
             'by_reference' => false,
             'required' => false,
@@ -50,6 +49,9 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
             'tree' => 0,
             'error_bubbling' => false,
             'extra' => [],
+            'entry_options' => [
+                'label' => false
+            ]
         ]);
 
         $resolver->setRequired('conf');
