@@ -8,6 +8,7 @@ export default class extends Controller {
     static values = {path: String};
 
     #dragCounter = 0;
+    #iframeTriggered = false;
 
     connect() {
         this.element[this.identifier] = this;
@@ -177,14 +178,23 @@ export default class extends Controller {
 
     openFileManager() {
         const iframe = this.fileManagerModalTarget.querySelector('iframe');
-        iframe.addEventListener('load', () => {
-            iframe.contentDocument.querySelectorAll('.select').forEach(item => {
-                item.addEventListener('click', e => {
-                    this.pathValue = e.target.dataset.path;
-                    this.fileManagerModalTarget.querySelector('.modal-footer button').click();
-                });
+        if (!this.#iframeTriggered) {
+            this.#iframeTriggered = true;
+            iframe.addEventListener('load', () => {
+                // equivalent of jquery's $iframe.contents().on('click', '.select', handler);
+                const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+                const self = this;
+                iframeContent.addEventListener('click', function(e) {
+                    for (let target = e.target; target && target !== this; target = target.parentNode) {
+                        if (target.matches('.select')) {
+                            self.pathValue = e.target.dataset.path;
+                            self.fileManagerModalTarget.querySelector('.modal-footer button').click();
+                            break;
+                        }
+                    }
+                }, false);
             });
-        });
+        }
         iframe.src = iframe.dataset.src;
     }
 

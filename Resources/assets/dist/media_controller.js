@@ -51,6 +51,8 @@ function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(
 
 var _dragCounter = /*#__PURE__*/new WeakMap();
 
+var _iframeTriggered = /*#__PURE__*/new WeakMap();
+
 var _pathUpdateEventListener = /*#__PURE__*/new WeakSet();
 
 var _toggleProgress = /*#__PURE__*/new WeakSet();
@@ -90,6 +92,11 @@ var _default = /*#__PURE__*/function (_Controller) {
     _classPrivateFieldInitSpec(_assertThisInitialized(_this), _dragCounter, {
       writable: true,
       value: 0
+    });
+
+    _classPrivateFieldInitSpec(_assertThisInitialized(_this), _iframeTriggered, {
+      writable: true,
+      value: false
     });
 
     return _this;
@@ -186,15 +193,26 @@ var _default = /*#__PURE__*/function (_Controller) {
       var _this3 = this;
 
       var iframe = this.fileManagerModalTarget.querySelector('iframe');
-      iframe.addEventListener('load', function () {
-        iframe.contentDocument.querySelectorAll('.select').forEach(function (item) {
-          item.addEventListener('click', function (e) {
-            _this3.pathValue = e.target.dataset.path;
 
-            _this3.fileManagerModalTarget.querySelector('.modal-footer button').click();
-          });
+      if (!_classPrivateFieldGet(this, _iframeTriggered)) {
+        _classPrivateFieldSet(this, _iframeTriggered, true);
+
+        iframe.addEventListener('load', function () {
+          // equivalent of jquery's $iframe.contents().on('click', '.select', handler);
+          var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+          var self = _this3;
+          iframeContent.addEventListener('click', function (e) {
+            for (var target = e.target; target && target !== this; target = target.parentNode) {
+              if (target.matches('.select')) {
+                self.pathValue = e.target.dataset.path;
+                self.fileManagerModalTarget.querySelector('.modal-footer button').click();
+                break;
+              }
+            }
+          }, false);
         });
-      });
+      }
+
       iframe.src = iframe.dataset.src;
     }
   }, {
