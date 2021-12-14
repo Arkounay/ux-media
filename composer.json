@@ -21,7 +21,7 @@
         "symfony/twig-bundle": ">=5.4.0",
         "artgris/filemanager-bundle": ">=2.0.0",
         "gregwar/image": "2.*",
-        "arkounay/ux-collection": "^1.0.0"
+        "arkounay/ux-collection": "^2.0.0"
     },
     "require-dev": {
         "symfony/framework-bundle": "^5.4|^6.0"
