@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UxMediaCollectionType extends UxCollectionType implements DataTransformerInterface
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
         $builder->addModelTransformer($this);
@@ -23,7 +23,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -59,7 +59,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
         $resolver->setNormalizer('entry_options', $entryOptionsNormalizer);
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         parent::buildView($view, $form, $options);
 
@@ -79,7 +79,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
     /**
      * {@inheritdoc}
      */
-    public function transform($value)
+    public function transform($value): mixed
     {
         return $value;
     }
@@ -87,7 +87,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($value): mixed
     {
         if (\count($value) === 0) {
             return null;

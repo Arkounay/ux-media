@@ -13,19 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CropController extends AbstractController
 {
 
-    /**
-     * @var FilemanagerService
-     */
-    private $filemanagerService;
+    public function __construct(private FilemanagerService $filemanagerService){}
 
-    public function __construct(FilemanagerService $filemanagerService)
-    {
-        $this->filemanagerService = $filemanagerService;
-    }
-
-    /**
-     * @Route("/crop/", name="ux_media_ajax_crop")
-     */
+    #[Route('/crop/', name: 'ux_media_ajax_crop')]
     public function ajaxCrop(Request $request): JsonResponse
     {
         $post = $request->request;

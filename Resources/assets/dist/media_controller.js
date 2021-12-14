@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _stimulus = require("stimulus");
+var _stimulus = require("@hotwired/stimulus");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -382,7 +382,6 @@ function _disableCropButton2() {
   var disabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
   if (this.hasCropButtonTarget) {
-    // this.cropButtonTarget.disabled = disabled;
     this.cropButtonTarget.style.display = disabled ? 'none' : '';
 
     if (disabled) {
