@@ -1,6 +1,6 @@
 'use strict';
 
-import { Controller } from 'stimulus';
+import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
 
@@ -119,7 +119,6 @@ export default class extends Controller {
 
     #disableCropButton(disabled = true) {
         if (this.hasCropButtonTarget) {
-            // this.cropButtonTarget.disabled = disabled;
             this.cropButtonTarget.style.display = disabled ? 'none' : '';
             if (disabled) {
                 this.cropButtonTarget.parentNode.classList.add('no-crop');
