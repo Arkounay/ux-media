@@ -2,7 +2,7 @@
     "name": "@arkounay/ux-media",
     "description": "Symfony UX async document upload type using ArtgrisFileManager",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "symfony": {
         "controllers": {
             "media": {
