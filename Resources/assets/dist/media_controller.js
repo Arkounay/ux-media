@@ -153,7 +153,7 @@ var _default = /*#__PURE__*/function (_Controller) {
       _classPrivateMethodGet(this, _disableCropButton, _disableCropButton2).call(this);
 
       if (hasValue) {
-        if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)$/i)) {
+        if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
           var img = document.createElement('img');
           img.src = this.pathValue;
           img.height = 75;

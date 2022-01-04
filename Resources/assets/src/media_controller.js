@@ -137,7 +137,7 @@ export default class extends Controller {
         const hasValue = this.pathValue !== '';
         this.#disableCropButton();
         if (hasValue) {
-            if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)$/i)) {
+            if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
                 const img = document.createElement('img');
                 img.src = this.pathValue;
                 img.height = 75;
