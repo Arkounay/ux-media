@@ -53,7 +53,7 @@ class CropController extends AbstractController
         $extension = $pathinfo['extension'];
 
         if ($src[0] === '/') {
-            $src = urldecode($this->getParameter('kernel.project_dir').'/'.$fileManager['web_dir'].$src);
+            $src = urldecode($fileManager['web_dir'].$src);
         }
 
         if (!file_exists($src)) {
@@ -72,9 +72,7 @@ class CropController extends AbstractController
             if (substr($destinationFolder, -1) !== DIRECTORY_SEPARATOR) {
                 $destinationFolder .= DIRECTORY_SEPARATOR;
             }
-            $rootdir = $this->getParameter('kernel.project_dir') . '/src';
 
-            $baseUrl = $rootdir . ' ../' . $fileManager['web_dir'];
             $cropStrAdd = '_crop_';
             $filename = $pathinfo['filename'];
             $cropPos = mb_strpos($filename, $cropStrAdd);
@@ -82,9 +80,9 @@ class CropController extends AbstractController
                 $filename = mb_substr($filename, 0, $cropPos);
             }
             $croppedPath = $this->getParameter('ux_media')['cropped_path'];
-            $savedPath = $image->save($rootdir . DIRECTORY_SEPARATOR . $destinationFolder . $croppedPath . urldecode($filename) . $cropStrAdd . uniqid() . '.' . $extension, 'guess', 85);
+            $savedPath = $image->save($destinationFolder . $croppedPath . urldecode($filename) . $cropStrAdd . uniqid() . '.' . $extension, 'guess', 85);
 
-            $savedPath = mb_substr($savedPath, mb_strlen($baseUrl));
+            $savedPath = mb_substr($savedPath, mb_strlen($fileManager['web_dir']));
             if ($savedPath[0] !== '/') {
                 $savedPath = $src;
             }
