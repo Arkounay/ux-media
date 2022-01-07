@@ -204,7 +204,7 @@ var _default = /*#__PURE__*/function (_Controller) {
           iframeContent.addEventListener('click', function (e) {
             for (var target = e.target; target && target !== this; target = target.parentNode) {
               if (target.matches('.select')) {
-                self.pathValue = e.target.dataset.path;
+                self.pathValue = target.dataset.path;
                 self.fileManagerModalTarget.querySelector('.modal-footer button').click();
                 break;
               }
