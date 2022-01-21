@@ -30,6 +30,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
         $entryOptionsNormalizer = function (Options $options, $value) {
             $value['conf'] = $options['conf'];
             $value['block_name'] = 'entry';
+            $value['label'] = false;
 
             return $value;
         };
@@ -49,9 +50,6 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
             'tree' => 0,
             'error_bubbling' => false,
             'extra' => [],
-            'entry_options' => [
-                'label' => false
-            ]
         ]);
 
         $resolver->setRequired('conf');
