@@ -6,7 +6,7 @@
     border-bottom-left-radius: 4px;
 }
 
-.ux-media-collection .sortable-ghost > div {
+.ux-media-collection .sortable-ghost .ux-media {
     border: 2px solid #86b7fe !important;
 }
 
@@ -14,4 +14,3 @@
     display: inline-flex;
     align-items: center;
 }
-
