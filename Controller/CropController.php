@@ -3,7 +3,6 @@
 namespace Arkounay\Bundle\UxMediaBundle\Controller;
 
 use Artgris\Bundle\FileManagerBundle\Service\FilemanagerService;
-use Artgris\Bundle\FileManagerBundle\Service\FileTypeService;
 use Gregwar\Image\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -62,8 +61,11 @@ class CropController extends AbstractController
 
         $image = Image::open($src)
             ->rotate(-$rotate)
-            ->flip($flipY, $flipX)
-            ->crop($x, $y, $width, $height);
+            ->flip($flipY, $flipX);
+
+        if ($width > 0 && $height > 0) {
+            $image->crop($x, $y, $width, $height);
+        }
 
         $savedPath = '/';
 
