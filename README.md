@@ -41,7 +41,7 @@ Also, make sure you have a conf that is defined :
 artgris_file_manager:
     conf:
         default:
-            dir: "../public/uploads"
+            dir: '%kernel.project_dir%/public/uploads'
 ```
 
 If your project is **NOT** using bootstrap, you need to enable the bootstrap_modal controller and enable scss :
