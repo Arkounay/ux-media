@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block ux_media_collection_widget %}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' ux-media-collection')|trim}) %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' arkounay-ux-collection ux-media-collection')|trim}) %}
     {{ block('ux_collection_widget') }}
 {% endblock %}
 
