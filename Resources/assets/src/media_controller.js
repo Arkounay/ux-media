@@ -173,6 +173,9 @@ export default class extends Controller {
         if (this.hasCropModalTarget) {
             this.cropModalTarget.dataset['arkounay-UxMedia-CropPathValue'] = this.pathValue;
         }
+
+        const event = new Event('change');
+        this.inputPathTarget.dispatchEvent(event);
     }
 
     openFileManager() {
