@@ -92,7 +92,6 @@ var _default = /*#__PURE__*/function (_Controller) {
           self.saveButtonTarget.disabled = data.width <= 4 && data.width > 0 || data.height <= 4 && data.height > 0 || data.width === 0 && data.height === 0 && data.x === 0 && data.y === 0 && data.scaleX === 1 && data.scaleY === 1 && data.rotate === 0;
         },
         ready: function ready() {
-          // this.cropper[method](argument1, , argument2, ..., argumentN);
           this.cropper.zoomTo(.9);
         }
       });
@@ -154,6 +153,7 @@ var _default = /*#__PURE__*/function (_Controller) {
       formData.append('scaleY', data.scaleY);
       formData.append('rotate', data.rotate);
       formData.append('checkCrossOrigin', false);
+      this.cropper.destroy();
       fetch(event.target.dataset.cropUrl, {
         method: 'POST',
         body: formData
@@ -166,9 +166,8 @@ var _default = /*#__PURE__*/function (_Controller) {
         });
 
         _this3.element.dispatchEvent(event);
-
-        _this3.cropper.destroy();
       })["catch"](function (error) {
+        console.error(error);
         alert(error.message);
       });
     }

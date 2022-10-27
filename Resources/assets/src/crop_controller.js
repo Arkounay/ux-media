@@ -44,7 +44,6 @@ export default class extends Controller {
                     || (data.width === 0 && data.height === 0 && data.x === 0 && data.y === 0 && data.scaleX === 1 && data.scaleY === 1 && data.rotate === 0);
             },
             ready() {
-                // this.cropper[method](argument1, , argument2, ..., argumentN);
                 this.cropper.zoomTo(.9);
             },
         });
@@ -100,6 +99,8 @@ export default class extends Controller {
         formData.append('rotate', data.rotate);
         formData.append('checkCrossOrigin', false);
 
+        this.cropper.destroy();
+
         fetch(event.target.dataset.cropUrl, {
             method: 'POST',
             body: formData
@@ -109,9 +110,9 @@ export default class extends Controller {
             this.pathValue = path;
             const event = new CustomEvent("pathUpdate", {detail: path});
             this.element.dispatchEvent(event);
-            this.cropper.destroy();
         })
         .catch((error) => {
+            console.error(error);
             alert(error.message);
         })
     }
