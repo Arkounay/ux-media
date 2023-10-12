@@ -1,6 +1,7 @@
 'use strict';
 
-import { Controller } from '@hotwired/stimulus';
+import {Controller} from '@hotwired/stimulus';
+import {icons} from "./icons";
 
 export default class extends Controller {
 
@@ -153,8 +154,12 @@ export default class extends Controller {
                 this.filePreviewTarget.appendChild(img);
             } else {
                 if (this.pathValue.match(/.+\.[A-Za-z]+/)) {
-                    const extension = this.pathValue.split('.').pop();
-                    this.filePreviewTarget.innerHTML = `<div class="border p-2 text-secondary bg-light rounded">${extension}</div>`;
+                    const extension = this.pathValue.split('.').pop().split('?')[0];
+                    let icon = icons[extension];
+                    if (icon === undefined) {
+                        icon = extension;
+                    }
+                    this.filePreviewTarget.innerHTML = `<div class="border p-2 text-secondary bg-light rounded">${icon}</div>`;
                     this.#disableCropButton();
                 } else {
                     this.filePreviewTarget.innerHTML = '';
