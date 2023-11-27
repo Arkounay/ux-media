@@ -5,7 +5,7 @@ import {icons} from "./icons";
 
 export default class extends Controller {
 
-    static targets = ['inputPath', 'filePreview', 'fileManagerModal', 'progress', 'cropModal', 'cropButton', 'fileError', 'fileErrorMessage'];
+    static targets = ['inputPath', 'filePreview', 'fileManagerModal', 'progress', 'clearButton' , 'cropModal', 'cropButton', 'fileError', 'fileErrorMessage'];
     static values = {path: String};
 
     #dragCounter = 0;
@@ -129,6 +129,12 @@ export default class extends Controller {
         }
     }
 
+    #hideClearButton(hidden = true) {
+        if (this.hasClearButtonTarget) {
+            this.clearButtonTarget.style.display = hidden ? 'none' : '';
+        }
+    }
+
     updatePathValue(e) {
         this.pathValue = e.target.value;
     }
@@ -137,6 +143,7 @@ export default class extends Controller {
         this.inputPathTarget.value = this.pathValue;
         const hasValue = this.pathValue !== '';
         this.#disableCropButton();
+        this.#hideClearButton();
         if (hasValue) {
             if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
                 const img = document.createElement('img');
@@ -145,10 +152,12 @@ export default class extends Controller {
                 img.addEventListener('error', () => {
                     this.imageLoaded = false;
                     this.#disableCropButton();
+                    this.#hideClearButton();
                 });
                 img.addEventListener('load', () => {
                     this.imageLoaded = true;
                     this.#disableCropButton(!img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|gif)$/i));
+                    this.#hideClearButton(!img.getAttribute('src'));
                 });
                 this.filePreviewTarget.innerHTML = '';
                 this.filePreviewTarget.appendChild(img);
@@ -161,6 +170,7 @@ export default class extends Controller {
                     }
                     this.filePreviewTarget.innerHTML = `<div class="border p-2 text-secondary bg-light rounded">${icon}</div>`;
                     this.#disableCropButton();
+                    this.#hideClearButton();
                 } else {
                     this.filePreviewTarget.innerHTML = '';
                 }

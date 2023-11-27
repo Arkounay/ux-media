@@ -65,6 +65,8 @@ var _setErrorMessage = /*#__PURE__*/new WeakSet();
 
 var _disableCropButton = /*#__PURE__*/new WeakSet();
 
+var _hideClearButton = /*#__PURE__*/new WeakSet();
+
 var _default = /*#__PURE__*/function (_Controller) {
   _inherits(_default, _Controller);
 
@@ -82,6 +84,8 @@ var _default = /*#__PURE__*/function (_Controller) {
     _this = _super.call.apply(_super, [this].concat(args));
 
     _classPrivateMethodInitSpec(_assertThisInitialized(_this), _disableCropButton);
+
+    _classPrivateMethodInitSpec(_assertThisInitialized(_this), _hideClearButton);
 
     _classPrivateMethodInitSpec(_assertThisInitialized(_this), _setErrorMessage);
 
@@ -153,6 +157,7 @@ var _default = /*#__PURE__*/function (_Controller) {
       var hasValue = this.pathValue !== '';
 
       _classPrivateMethodGet(this, _disableCropButton, _disableCropButton2).call(this);
+      _classPrivateMethodGet(this, _hideClearButton, _hideClearButton2).call(this);
 
       if (hasValue) {
         if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
@@ -163,11 +168,13 @@ var _default = /*#__PURE__*/function (_Controller) {
             _this2.imageLoaded = false;
 
             _classPrivateMethodGet(_this2, _disableCropButton, _disableCropButton2).call(_this2);
+            _classPrivateMethodGet(_this2, _hideClearButton, _hideClearButton2).call(_this2);
           });
           img.addEventListener('load', function () {
             _this2.imageLoaded = true;
 
             _classPrivateMethodGet(_this2, _disableCropButton, _disableCropButton2).call(_this2, !img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|gif)$/i));
+            _classPrivateMethodGet(_this2, _hideClearButton, _hideClearButton2).call(_this2, !img.getAttribute('src'));
           });
           this.filePreviewTarget.innerHTML = '';
           this.filePreviewTarget.appendChild(img);
@@ -183,6 +190,7 @@ var _default = /*#__PURE__*/function (_Controller) {
             this.filePreviewTarget.innerHTML = "<div class=\"border p-2 text-secondary bg-light rounded\">".concat(icon, "</div>");
 
             _classPrivateMethodGet(this, _disableCropButton, _disableCropButton2).call(this);
+            _classPrivateMethodGet(this, _hideClearButton, _hideClearButton2).call(this);
           } else {
             this.filePreviewTarget.innerHTML = '';
           }
@@ -403,7 +411,15 @@ function _disableCropButton2() {
   }
 }
 
-_defineProperty(_default, "targets", ['inputPath', 'filePreview', 'fileManagerModal', 'progress', 'cropModal', 'cropButton', 'fileError', 'fileErrorMessage']);
+function _hideClearButton2() {
+  var hidden = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+  if (this.hasClearButtonTarget) {
+    this.clearButtonTarget.style.display = hidden ? 'none' : '';
+  }
+}
+
+_defineProperty(_default, "targets", ['inputPath', 'filePreview', 'fileManagerModal', 'progress', 'clearButton', 'cropModal', 'cropButton', 'fileError', 'fileErrorMessage']);
 
 _defineProperty(_default, "values", {
   path: String
