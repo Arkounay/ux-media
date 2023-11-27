@@ -22,6 +22,7 @@ class UxMediaType extends AbstractType
             'allow_crop' => $options['allow_crop'],
             'crop_options' => $options['crop_options'],
             'display_file_manager' => $options['display_file_manager'],
+            'display_clear_button' => $options['display_clear_button'],
         ]);
     }
 
@@ -42,6 +43,7 @@ class UxMediaType extends AbstractType
             'error_bubbling' => false,
             'display_file_manager' => true,
             'extra' => [],
+            'display_clear_button' => true,
         ]);
 
         $resolver->setRequired('conf');

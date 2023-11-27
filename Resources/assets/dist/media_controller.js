@@ -83,9 +83,9 @@ var _default = /*#__PURE__*/function (_Controller) {
 
     _this = _super.call.apply(_super, [this].concat(args));
 
-    _classPrivateMethodInitSpec(_assertThisInitialized(_this), _disableCropButton);
-
     _classPrivateMethodInitSpec(_assertThisInitialized(_this), _hideClearButton);
+
+    _classPrivateMethodInitSpec(_assertThisInitialized(_this), _disableCropButton);
 
     _classPrivateMethodInitSpec(_assertThisInitialized(_this), _setErrorMessage);
 
@@ -157,7 +157,8 @@ var _default = /*#__PURE__*/function (_Controller) {
       var hasValue = this.pathValue !== '';
 
       _classPrivateMethodGet(this, _disableCropButton, _disableCropButton2).call(this);
-      _classPrivateMethodGet(this, _hideClearButton, _hideClearButton2).call(this);
+
+      _classPrivateMethodGet(this, _hideClearButton, _hideClearButton2).call(this, !hasValue);
 
       if (hasValue) {
         if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
@@ -168,13 +169,11 @@ var _default = /*#__PURE__*/function (_Controller) {
             _this2.imageLoaded = false;
 
             _classPrivateMethodGet(_this2, _disableCropButton, _disableCropButton2).call(_this2);
-            _classPrivateMethodGet(_this2, _hideClearButton, _hideClearButton2).call(_this2);
           });
           img.addEventListener('load', function () {
             _this2.imageLoaded = true;
 
             _classPrivateMethodGet(_this2, _disableCropButton, _disableCropButton2).call(_this2, !img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|gif)$/i));
-            _classPrivateMethodGet(_this2, _hideClearButton, _hideClearButton2).call(_this2, !img.getAttribute('src'));
           });
           this.filePreviewTarget.innerHTML = '';
           this.filePreviewTarget.appendChild(img);
@@ -190,7 +189,6 @@ var _default = /*#__PURE__*/function (_Controller) {
             this.filePreviewTarget.innerHTML = "<div class=\"border p-2 text-secondary bg-light rounded\">".concat(icon, "</div>");
 
             _classPrivateMethodGet(this, _disableCropButton, _disableCropButton2).call(this);
-            _classPrivateMethodGet(this, _hideClearButton, _hideClearButton2).call(this);
           } else {
             this.filePreviewTarget.innerHTML = '';
           }

@@ -143,7 +143,7 @@ export default class extends Controller {
         this.inputPathTarget.value = this.pathValue;
         const hasValue = this.pathValue !== '';
         this.#disableCropButton();
-        this.#hideClearButton();
+        this.#hideClearButton(!hasValue);
         if (hasValue) {
             if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
                 const img = document.createElement('img');
@@ -152,12 +152,10 @@ export default class extends Controller {
                 img.addEventListener('error', () => {
                     this.imageLoaded = false;
                     this.#disableCropButton();
-                    this.#hideClearButton();
                 });
                 img.addEventListener('load', () => {
                     this.imageLoaded = true;
                     this.#disableCropButton(!img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|gif)$/i));
-                    this.#hideClearButton(!img.getAttribute('src'));
                 });
                 this.filePreviewTarget.innerHTML = '';
                 this.filePreviewTarget.appendChild(img);
@@ -170,7 +168,6 @@ export default class extends Controller {
                     }
                     this.filePreviewTarget.innerHTML = `<div class="border p-2 text-secondary bg-light rounded">${icon}</div>`;
                     this.#disableCropButton();
-                    this.#hideClearButton();
                 } else {
                     this.filePreviewTarget.innerHTML = '';
                 }

@@ -106,6 +106,7 @@ Works like [Artgris/MediaBundle](https://github.com/artgris/MediaBundle) except 
 $builder->add('Media', UxMediaType::class, [
     'conf' => 'default',
     'display_file_manager' => true,
+    'display_clear_button' => true,
     'allow_crop' => true,
     'crop_options' => [
         'display_crop_data' => true,
