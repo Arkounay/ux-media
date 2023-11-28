@@ -14,13 +14,13 @@
 {% block ux_media_row %}
     {%- if 'ux_media_collection_entry' in block_prefixes -%}
         {%- set row_attr = row_attr|merge({'data-arkounay--ux-collection--collection-target': 'collectionElement'}) -%}
-    {%- endif -%}
-    <div {% for k, v in row_attr|default %}{{ k }}="{{ v }}"{% endfor %}>
+        <div {% for k, v in row_attr|default %}{{ k }}="{{ v }}"{% endfor %}>
         {{ form_label(form) }}
-        <div {% for k, v in attr|default %}{{ k }}="{{ v }}"{% endfor %}>
-            {{ form_widget(form) }}
-            {{ form_errors(form) }}
-            {{ form_rest(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+        {{ form_rest(form) }}
         </div>
-    </div>
+    {%- else -%}
+        {{ form_row(form) }}
+    {%- endif -%}
 {% endblock %}

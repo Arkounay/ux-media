@@ -1,85 +1,92 @@
 {% set collection = form.parent.vars.collection|default(false) %}
 {% apply spaceless %}
-    <div class="ux-media mb-2 border bg-white rounded {% if form.vars.errors|length > 0 %}error{% endif %}"
-         data-controller="arkounay--ux-media--media" data-arkounay--ux-media--media-path-value="{{ form.vars.value }}"
-         data-filemanager-url="{{ path('file_manager_upload', {conf: conf, extra: extra}) }}"
-         data-action="dragenter->arkounay--ux-media--media#dragenter dragleave->arkounay--ux-media--media#dragleave dragover->arkounay--ux-media--media#dragover drop->arkounay--ux-media--media#drop">
+    {%- set attr = attr|default([])|merge({
+        'class': attr.class|default('ux-media mb-2 border bg-white rounded'),
+        'data-controller': attr['data-controller']|default('arkounay--ux-media--media'),
+        'data-filemanager-url': attr['data-filemanager-url']|default(path('file_manager_upload', {conf: conf, extra: extra})),
+        'data-arkounay--ux-media--media-path-value': attr['data-arkounay--ux-media--media-path-value']|default(form.vars.value),
+        'data-action': attr['data-action']|default('dragenter->arkounay--ux-media--media#dragenter dragleave->arkounay--ux-media--media#dragleave dragover->arkounay--ux-media--media#dragover drop->arkounay--ux-media--media#drop')
+    }) -%}
+    {% if form.vars.errors|length > 0 %}
+        {% set attr = attr|merge({'class': attr.class ~ ' error'}) %}
+    {% endif %}
+    <div {% for k, v in attr %}{{ k }}="{{ v }}" {% endfor %}>
 
-        <div class="d-flex flex-column flex-sm-row align-items-center p-2">
+    <div class="d-flex flex-column flex-sm-row align-items-center p-2">
 
-            <div class="d-flex flex-column align-content-center align-items-center">
-                {% if (form.parent.vars.display_sort_buttons)|default(false) %}
-                    <a href="#" data-action="arkounay--ux-collection--collection#moveUp"
-                       data-arkounay--ux-collection--collection-target="up" class="collection-up btn btn-collection">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-up" width="16"
-                             height="16" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <line x1="12" y1="5" x2="12" y2="19"/>
-                            <line x1="18" y1="11" x2="12" y2="5"/>
-                            <line x1="6" y1="11" x2="12" y2="5"/>
-                        </svg>
-                    </a>
-                    <a href="#" data-action="arkounay--ux-collection--collection#moveDown"
-                       data-arkounay--ux-collection--collection-target="down"
-                       class="collection-down btn btn-collection">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-down"
-                             width="16" height="16" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                             fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <line x1="12" y1="5" x2="12" y2="19"/>
-                            <line x1="18" y1="13" x2="12" y2="19"/>
-                            <line x1="6" y1="13" x2="12" y2="19"/>
-                        </svg>
-                    </a>
-                {% endif %}
+        <div class="d-flex flex-column align-content-center align-items-center">
+            {% if (form.parent.vars.display_sort_buttons)|default(false) %}
+                <a href="#" data-action="arkounay--ux-collection--collection#moveUp"
+                   data-arkounay--ux-collection--collection-target="up" class="collection-up btn btn-collection">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-up" width="16"
+                         height="16" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="18" y1="11" x2="12" y2="5"/>
+                        <line x1="6" y1="11" x2="12" y2="5"/>
+                    </svg>
+                </a>
+                <a href="#" data-action="arkounay--ux-collection--collection#moveDown"
+                   data-arkounay--ux-collection--collection-target="down"
+                   class="collection-down btn btn-collection">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-down"
+                         width="16" height="16" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                         fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="18" y1="13" x2="12" y2="19"/>
+                        <line x1="6" y1="13" x2="12" y2="19"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </div>
+
+        {% set base_path = form.vars.allow_crop ? get_web_path(conf, extra) : 1 %}
+        {% block file_preview %}
+            <div class="img-preview text-center p-2" data-arkounay--ux-media--media-target="filePreview"
+                 id="preview-{{ form.vars.id }}" data-id="{{ id }}" data-conf="{{ conf }}"
+                 data-extra="{{ extra|json_encode }}" data-base-path="{{ base_path }}">
             </div>
+        {% endblock %}
 
-            {% set base_path = form.vars.allow_crop ? get_web_path(conf, extra) : 1 %}
-            {% block file_preview %}
-                <div class="img-preview text-center p-2" data-arkounay--ux-media--media-target="filePreview"
-                     id="preview-{{ form.vars.id }}" data-id="{{ id }}" data-conf="{{ conf }}"
-                     data-extra="{{ extra|json_encode }}" data-base-path="{{ base_path }}">
+        {# label + input #}
+        <div class="flex-grow-1">
+            {% block fields %}
+                <input type="text" class="form-control" data-action="arkounay--ux-media--media#updatePathValue"
+                       data-arkounay--ux-media--media-target="inputPath" id="{{ form.vars.id }}"
+                       name="{{ form.vars.full_name }}" {% if form.vars.required %}required="required"{% endif %}
+                       value="{{ form.vars.value }}"
+                       placeholder="{{ 'ux_media.path.placeholder'|trans }}" {{ form.vars.readonly|default ? 'readonly="readonly"' }}>
+                <div class="progress d-none" data-arkounay--ux-media--media-target="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10"
+                         aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
                 </div>
             {% endblock %}
+        </div>
 
-            {# label + input #}
-            <div class="flex-grow-1">
-                {% block fields %}
-                    <input type="text" class="form-control" data-action="arkounay--ux-media--media#updatePathValue"
-                           data-arkounay--ux-media--media-target="inputPath" id="{{ form.vars.id }}"
-                           name="{{ form.vars.full_name }}" {% if form.vars.required %}required="required"{% endif %}
-                           value="{{ form.vars.value }}"
-                           placeholder="{{ 'ux_media.path.placeholder'|trans }}" {{ form.vars.readonly|default ? 'readonly="readonly"' }}>
-                    <div class="progress d-none" data-arkounay--ux-media--media-target="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
-                    </div>
-                {% endblock %}
-            </div>
+        <div class="p-2 text-center d-flex align-items-center">
+            <div class="btn-group" role="group" style="height: 40px">
+                {% block media_buttons %}
+                    {% if form.vars.allow_crop %}
+                        <button type="button" class="btn btn-light" data-base-path="{{ base_path }}"
+                                data-bs-toggle="modal" data-bs-target="#crop-modal-{{ id }}"
+                                data-bs-backdrop="static" data-arkounay--ux-media--media-target="cropButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-crop"
+                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M8 5v10a1 1 0 0 0 1 1h10"/>
+                                <path d="M5 8h10a1 1 0 0 1 1 1v10"/>
+                            </svg>
+                        </button>
+                        {% include '@ArkounayUxMedia/_ux_crop_modal.html.twig' with {crop_options: form.vars.crop_options} %}
+                    {% endif %}
 
-            <div class="p-2 text-center d-flex align-items-center">
-                <div class="btn-group" role="group" style="height: 40px">
-                    {% block media_buttons %}
-                        {% if form.vars.allow_crop %}
-                            <button type="button" class="btn btn-light" data-base-path="{{ base_path }}"
-                                    data-bs-toggle="modal" data-bs-target="#crop-modal-{{ id }}"
-                                    data-bs-backdrop="static" data-arkounay--ux-media--media-target="cropButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-crop"
-                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50"
-                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <path d="M8 5v10a1 1 0 0 0 1 1h10"/>
-                                    <path d="M5 8h10a1 1 0 0 1 1 1v10"/>
-                                </svg>
-                            </button>
-                            {% include '@ArkounayUxMedia/_ux_crop_modal.html.twig' with {crop_options: form.vars.crop_options} %}
-                        {% endif %}
-
-                        {% if form.vars.display_clear_button %}
-                            <button type="button" class="btn btn-light btn-upload"
-                                    data-action="arkounay--ux-media--media#clear"
-                                    data-arkounay--ux-media--media-target="clearButton">
+                    {% if form.vars.display_clear_button %}
+                        <button type="button" class="btn btn-light btn-upload"
+                                data-action="arkounay--ux-media--media#clear"
+                                data-arkounay--ux-media--media-target="clearButton">
                                 <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-trash"
@@ -88,12 +95,12 @@
                                             fill-rule="evenodd"
                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/> </svg>
                                 </span>
-                            </button>
-                        {% endif %}
+                        </button>
+                    {% endif %}
 
-                        <button type="button" class="btn btn-light btn-upload"
-                                data-controller="arkounay--ux-media--upload"
-                                data-action="arkounay--ux-media--upload#click">
+                    <button type="button" class="btn btn-light btn-upload"
+                            data-controller="arkounay--ux-media--upload"
+                            data-action="arkounay--ux-media--upload#click">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload"
                                      width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -104,88 +111,88 @@
                                   <line x1="12" y1="4" x2="12" y2="16"/>
                                 </svg>
                             </span>
-                            <input class="fileupload d-none" data-arkounay--ux-media--upload-target="inputFile"
-                                   data-action="arkounay--ux-media--media#upload" type="file" name="files[]"
-                                   multiple="">
+                        <input class="fileupload d-none" data-arkounay--ux-media--upload-target="inputFile"
+                               data-action="arkounay--ux-media--media#upload" type="file" name="files[]"
+                               multiple="">
+                    </button>
+
+                    {% if form.vars.display_file_manager %}
+                        <button type="button" class="btn btn-light btn-manager" data-bs-toggle="modal"
+                                data-bs-target="#filemanager-modal-{{ id }}"
+                                data-action="arkounay--ux-media--media#openFileManager">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder"
+                                 width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"/>
+                            </svg>
                         </button>
 
-                        {% if form.vars.display_file_manager %}
-                            <button type="button" class="btn btn-light btn-manager" data-bs-toggle="modal"
-                                    data-bs-target="#filemanager-modal-{{ id }}"
-                                    data-action="arkounay--ux-media--media#openFileManager">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder"
-                                     width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"/>
-                                </svg>
-                            </button>
+                    {% endif %}
+                {% endblock %}
+            </div>
 
-                        {% endif %}
-                    {% endblock %}
-                </div>
-
-                {% if form.vars.display_file_manager %}
-                    {% block filemanager_modal %}
-                        <div class="modal fade media-modal" id="filemanager-modal-{{ form.vars.id }}" tabindex="-1"
-                             role="dialog" data-arkounay--ux-media--media-target="fileManagerModal">
-                            <div class="modal-dialog modal-xl" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">{{ 'File Manager'|trans }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <iframe class="iframe"
-                                                data-src="{{ path('file_manager', {module:1, conf:conf, tree:tree, extra:extra}) }}"
-                                                width="100%"
-                                                height="500"
-                                                frameborder="0"></iframe>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">{{ 'Close'|trans }}</button>
-                                    </div>
+            {% if form.vars.display_file_manager %}
+                {% block filemanager_modal %}
+                    <div class="modal fade media-modal" id="filemanager-modal-{{ form.vars.id }}" tabindex="-1"
+                         role="dialog" data-arkounay--ux-media--media-target="fileManagerModal">
+                        <div class="modal-dialog modal-xl" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">{{ 'File Manager'|trans }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <iframe class="iframe"
+                                            data-src="{{ path('file_manager', {module:1, conf:conf, tree:tree, extra:extra}) }}"
+                                            width="100%"
+                                            height="500"
+                                            frameborder="0"></iframe>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">{{ 'Close'|trans }}</button>
                                 </div>
                             </div>
                         </div>
-                    {% endblock %}
-                {% endif %}
+                    </div>
+                {% endblock %}
+            {% endif %}
 
-                {% if collection %}
-                    {% block collection_buttons %}
-                        <button type="button" data-action="arkounay--ux-collection--collection#remove"
-                                data-arkounay--ux-collection--collection-target="delete" style="height: 40px"
-                                class="collection-remove btn btn-collection btn-collection-remove text-danger">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16"
-                                 height="16" viewBox="0 0 24 24" stroke-width="2" stroke="#FF0000" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <line x1="18" y1="6" x2="6" y2="18"/>
-                                <line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                    {% endblock %}
-                {% endif %}
+            {% if collection %}
+                {% block collection_buttons %}
+                    <button type="button" data-action="arkounay--ux-collection--collection#remove"
+                            data-arkounay--ux-collection--collection-target="delete" style="height: 40px"
+                            class="collection-remove btn btn-collection btn-collection-remove text-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16"
+                             height="16" viewBox="0 0 24 24" stroke-width="2" stroke="#FF0000" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                {% endblock %}
+            {% endif %}
 
-            </div>
         </div>
+    </div>
 
-        <div data-arkounay--ux-media--media-target="fileError"
-             class="small text-danger m-2 mx-sm-3 text-center text-sm-start d-none">
-            <span data-arkounay--ux-media--media-target="fileErrorMessage"></span>
-            <button type="button" data-action="arkounay--ux-media--media#clearErrorMessage"
-                    class="collection-error-message-button btn text-danger">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16"
-                     viewBox="0 0 24 24" stroke-width="2" stroke="#FF0000" fill="none" stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-            </button>
-        </div>
+    <div data-arkounay--ux-media--media-target="fileError"
+         class="small text-danger m-2 mx-sm-3 text-center text-sm-start d-none">
+        <span data-arkounay--ux-media--media-target="fileErrorMessage"></span>
+        <button type="button" data-action="arkounay--ux-media--media#clearErrorMessage"
+                class="collection-error-message-button btn text-danger">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16"
+                 viewBox="0 0 24 24" stroke-width="2" stroke="#FF0000" fill="none" stroke-linecap="round"
+                 stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
     </div>
 {% endapply %}
