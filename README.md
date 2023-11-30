@@ -108,6 +108,7 @@ $builder->add('Media', UxMediaType::class, [
     'display_file_manager' => true,
     'display_clear_button' => true,
     'allow_crop' => true,
+    'readonly' => false,
     'crop_options' => [
         'display_crop_data' => true,
         'allow_flip' => true,
