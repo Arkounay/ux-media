@@ -31,6 +31,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
             $value['conf'] = $options['conf'];
             $value['block_name'] = 'entry';
             $value['label'] = false;
+            $value['readonly'] = $options['readonly'];
 
             return $value;
         };
@@ -47,6 +48,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
             'required' => false,
             'min' => 0,
             'max' => null,
+            'readonly' => false,
             'tree' => 0,
             'error_bubbling' => false,
             'extra' => [],
