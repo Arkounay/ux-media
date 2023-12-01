@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Loader;
 class ArkounayUxMediaExtension extends Extension implements PrependExtensionInterface
 {
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
 
@@ -24,7 +24,7 @@ class ArkounayUxMediaExtension extends Extension implements PrependExtensionInte
         $container->prependExtensionConfig('twig', ['form_themes' => ['@ArkounayUxMedia/ux_media_form_theme.html.twig']]);
     }
 
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
