@@ -25,12 +25,12 @@ Make sure its routing is enabled, as well as UxMedia routes :
 ```yaml
 artgris_file_manager:
     resource: "@ArtgrisFileManagerBundle/Controller"
-    type:     annotation
+    type:     attribute
     prefix:   /admin/manager
 
 ux_media:
     resource: "@ArkounayUxMediaBundle/Controller"
-    type:     annotation
+    type:     attribute
     prefix:   /admin/ux-media
 ```
 
