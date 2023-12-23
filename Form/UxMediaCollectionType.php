@@ -29,6 +29,7 @@ class UxMediaCollectionType extends UxCollectionType implements DataTransformerI
 
         $entryOptionsNormalizer = function (Options $options, $value) {
             $value['conf'] = $options['conf'];
+            $value['extra'] = $options['extra'];
             $value['block_name'] = 'entry';
             $value['label'] = false;
 
