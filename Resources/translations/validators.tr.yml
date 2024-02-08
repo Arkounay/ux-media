@@ -1,0 +1,3 @@
+ux_media_validation:
+    image: 'Bu alan bir resim olmalıdır.'
+    not_blank: 'Bu alan boş olmamalıdır.'
