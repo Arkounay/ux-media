@@ -24,7 +24,7 @@
                     <div class="col-md-6">
                         <div class="btn-toolbar pb-3">
                             <div class="btn-group me-2">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="button" aria-pressed="true" data-action="arkounay--ux-media--crop#toggleCrop">
+                                <button type="button" class="btn btn-outline-secondary" title="{{ 'Crop'|trans }}" data-bs-toggle="button" aria-pressed="true" data-action="arkounay--ux-media--crop#toggleCrop">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-crop m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M8 5v10a1 1 0 0 0 1 1h10"></path>
@@ -35,13 +35,13 @@
 
                             {% if crop_options.allow_rotation %}
                                 <div class="btn-group me-2">
-                                    <button type="button" class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#rotateLeft">
+                                    <button type="button" class="btn btn-outline-secondary" title="{{ 'Rotate Left'|trans }}" data-action="arkounay--ux-media--crop#rotateLeft">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5"></path>
                                         </svg>
                                     </button>
-                                    <button type="button" class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#rotateRight">
+                                    <button type="button" class="btn btn-outline-secondary" title="{{ 'Rotate Right'|trans }}" data-action="arkounay--ux-media--crop#rotateRight">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-clockwise m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5"></path>
@@ -52,7 +52,7 @@
 
                             {% if crop_options.allow_flip %}
                                 <div class="btn-group me-2">
-                                    <button type="button" class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#flipHorizontal">
+                                    <button type="button" class="btn btn-outline-secondary" title="{{ 'Horizontal Mirror'|trans }}" data-action="arkounay--ux-media--crop#flipHorizontal">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-horizontal m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <polyline points="7 8 3 12 7 16"></polyline>
@@ -60,7 +60,7 @@
                                             <line x1="3" y1="12" x2="21" y2="12"></line>
                                         </svg>
                                     </button>
-                                    <button type="button" class="btn btn-outline-secondary" data-action="arkounay--ux-media--crop#flipVertical">
+                                    <button type="button" class="btn btn-outline-secondary" title="{{ 'Vertical Mirror'|trans }}" data-action="arkounay--ux-media--crop#flipVertical">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-vertical m-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <polyline points="8 7 12 3 16 7"></polyline>
@@ -76,10 +76,10 @@
                         <div class="col-md-6">
                             <div class="float-end image-data py-2 ">
                                 {% for el in ['x', 'y', 'width', 'height'] %}
-                                    <span class="label"> {{ (el ~ ':')|capitalize|trans }} <span data-arkounay--ux-media--crop-target="{{ el }}">0</span></span>
+                                    <span class="label"> {{ (el)|capitalize|trans ~ ':' }} <span data-arkounay--ux-media--crop-target="{{ el }}"> 0</span></span>
                                 {% endfor %}
                                 {% if crop_options.ratio|default %}
-                                    <span class="label label-primary"> {{ 'Ratio: '|trans ~ crop_options.ratio|round(2) }}  </span>
+                                    <span class="label label-primary"> {{ 'Ratio'|trans ~ ':' ~ crop_options.ratio|round(2) }}  </span>
                                 {% endif %}
                             </div>
                         </div>
