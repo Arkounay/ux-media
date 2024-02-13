@@ -108,7 +108,7 @@ export default class extends Controller {
         .then(response => response.json())
         .then((path) => {
             this.pathValue = path;
-            const event = new CustomEvent("pathUpdate", {detail: path});
+            const event = new CustomEvent("pathUpdate", {detail: path.split('/').map(encodeURIComponent).join('/')});
             this.element.dispatchEvent(event);
         })
         .catch((error) => {

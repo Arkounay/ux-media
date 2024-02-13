@@ -1,6 +1,6 @@
 'use strict';
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -15,11 +15,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -29,7 +29,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
 
@@ -221,7 +221,7 @@ var _default = /*#__PURE__*/function (_Controller) {
           iframeContent.addEventListener('click', function (e) {
             for (var target = e.target; target && target !== this; target = target.parentNode) {
               if (target.matches('.select')) {
-                self.pathValue = encodeURI(target.dataset.path);
+                self.pathValue = target.dataset.path;
                 self.fileManagerModalTarget.querySelector('.modal-footer button').click();
                 break;
               }
@@ -253,7 +253,7 @@ var _default = /*#__PURE__*/function (_Controller) {
   }, {
     key: "dragenter",
     value: function dragenter(event) {
-      var _this$dragCounter, _this$dragCounter2;
+      var _this$dragCounter;
 
       var containsFiles = false;
 
@@ -272,14 +272,14 @@ var _default = /*#__PURE__*/function (_Controller) {
       }
 
       event.preventDefault();
-      _classPrivateFieldSet(this, _dragCounter, (_this$dragCounter = _classPrivateFieldGet(this, _dragCounter), _this$dragCounter2 = _this$dragCounter++, _this$dragCounter)), _this$dragCounter2;
+      _classPrivateFieldSet(this, _dragCounter, (_this$dragCounter = +_classPrivateFieldGet(this, _dragCounter)) + 1), _this$dragCounter;
     }
   }, {
     key: "dragleave",
     value: function dragleave() {
-      var _this$dragCounter3, _this$dragCounter4;
+      var _this$dragCounter2;
 
-      _classPrivateFieldSet(this, _dragCounter, (_this$dragCounter3 = _classPrivateFieldGet(this, _dragCounter), _this$dragCounter4 = _this$dragCounter3--, _this$dragCounter3)), _this$dragCounter4;
+      _classPrivateFieldSet(this, _dragCounter, (_this$dragCounter2 = +_classPrivateFieldGet(this, _dragCounter)) - 1), _this$dragCounter2;
 
       if (_classPrivateFieldGet(this, _dragCounter) === 0) {
         this.element.classList.remove("bg-light");
