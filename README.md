@@ -1,19 +1,27 @@
 # Ux Media
 
-Symfony UX async document upload type using ArtgrisFileManager, a [MediaBundle](https://github.com/artgris/MediaBundle) version that works without having to use most of its dependecies like jQuery / jQuery UI / Font awesome etc (but **still requires bootstrap 5**)
+Symfony UX async document upload form type using ArtgrisFileManager, a [MediaBundle](https://github.com/artgris/MediaBundle) version that works without having to use most of its dependecies like jQuery / jQuery UI / Font awesome etc (but **still requires bootstrap 5**)
 
 ## Installation
 
+**Before you start, make sure you have [StimulusBundle](https://symfony.com/bundles/StimulusBundle/current/index.html) configured in your app.**
+
+Install the bundle using Composer and Symfony Flex:
+
 ```sh
 composer require arkounay/ux-media
-
-# Don't forget to install the JavaScript dependencies as well and compile
-yarn install --force
-yarn encore dev
 ```
 
-Also make sure you have at least version 3.0 of [@symfony/stimulus-bridge](https://github.com/symfony/stimulus-bridge)
-in your `package.json` file.
+If you're using WebpackEncore, install your assets and restart Encore (not needed if you're using AssetMapper):
+
+```sh
+npm install --force
+npm run watch
+
+# or use yarn
+yarn install --force
+yarn watch
+```
 
 
 ### Configuration prerequisites
@@ -130,7 +138,7 @@ public function configureCrud(): Crud
 }
 ```
 
-You will need to configure your admin to use WebpackEncore so Symfony UX is taken into account, for example:
+If you're using WebpackEncore, you will need to configure your admin to use it so Symfony UX is taken into account, for example:
 ```php
 public function configureAssets(Assets $assets): Assets
 {

@@ -1,7 +1,7 @@
 'use strict';
 
 import {Controller} from '@hotwired/stimulus';
-import {icons} from "./icons";
+import {icons} from "./icons.js";
 
 export default class extends Controller {
 

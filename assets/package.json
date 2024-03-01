@@ -1,8 +1,8 @@
 {
     "name": "@arkounay/ux-media",
-    "description": "Symfony UX async document upload type using ArtgrisFileManager",
+    "description": "Symfony UX async document upload form type using ArtgrisFileManager",
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "4.0.0",
     "symfony": {
         "controllers": {
             "media": {
@@ -39,6 +39,11 @@
                     "@arkounay/ux-media/src/bootstrap_modal.scss": true
                 }
             }
+        },
+        "importmap": {
+            "cropperjs": "^1.5.12",
+            "@hotwired/stimulus": "^3.0.0",
+            "bootstrap": "^5.1.2"
         }
     },
     "scripts": {
@@ -51,12 +56,13 @@
         "bootstrap": "^5.1.2"
     },
     "devDependencies": {
-        "@babel/cli": "^7.12.1",
-        "@babel/core": "^7.12.3",
-        "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@babel/preset-env": "^7.12.7",
+        "@babel/cli": "^7.23.9",
+        "@babel/core": "^7.24.0",
+        "@babel/plugin-transform-class-properties": "^7.23.3",
+        "@babel/preset-env": "^7.24.0",
+        "@babel/preset-typescript": "^7.23.3",
+        "@hotwired/stimulus": "^3.2.2",
         "cropperjs": "^1.5.12",
-        "@hotwired/stimulus": "^3.0.0",
         "bootstrap": "^5.1.2"
     }
 }

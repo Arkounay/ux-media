@@ -20,10 +20,10 @@
         "symfony/twig-bundle": ">=5.4.0",
         "artgris/filemanager-bundle": "^2.10.0",
         "gregwar/image": "2.*",
-        "arkounay/ux-collection": "^3.0.0"
+        "arkounay/ux-collection": "^4.0.0"
     },
     "require-dev": {
-        "symfony/framework-bundle": "^5.4|^6.0"
+        "symfony/framework-bundle": "^6.0|^7.0"
     },
     "autoload": {
         "psr-4": {
