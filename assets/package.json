@@ -39,16 +39,16 @@
                     "@arkounay/ux-media/src/bootstrap_modal.scss": true
                 }
             }
+        },
+        "importmap": {
+            "cropperjs": "^1.5.12",
+            "@hotwired/stimulus": "^3.0.0",
+            "bootstrap": "^5.1.2"
         }
     },
     "scripts": {
         "build": "babel src -d dist",
         "lint": "eslint src test"
-    },
-    "importmap": {
-        "cropperjs": "^1.5.12",
-        "@hotwired/stimulus": "^3.0.0",
-        "bootstrap": "^5.1.2"
     },
     "peerDependencies": {
         "cropperjs": "^1.5.12",
