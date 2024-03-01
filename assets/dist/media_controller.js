@@ -15,7 +15,7 @@ function _classPrivateFieldLooseBase(receiver, privateKey) { if (!Object.prototy
 var id = 0;
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 import { Controller } from '@hotwired/stimulus';
-import { icons } from "./icons";
+import { icons } from "./icons.js";
 var _dragCounter = /*#__PURE__*/_classPrivateFieldLooseKey("dragCounter");
 var _iframeTriggered = /*#__PURE__*/_classPrivateFieldLooseKey("iframeTriggered");
 var _pathUpdateEventListener = /*#__PURE__*/_classPrivateFieldLooseKey("pathUpdateEventListener");
