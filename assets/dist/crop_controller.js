@@ -11,7 +11,6 @@ import { Controller } from '@hotwired/stimulus';
 import Cropper from 'cropperjs';
 import 'cropperjs';
 var _default = /*#__PURE__*/function (_Controller) {
-  _inheritsLoose(_default, _Controller);
   function _default() {
     var _this;
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -21,6 +20,7 @@ var _default = /*#__PURE__*/function (_Controller) {
     _this.parent = void 0;
     return _this;
   }
+  _inheritsLoose(_default, _Controller);
   var _proto = _default.prototype;
   _proto.connect = function connect() {
     var _this2 = this;

@@ -10,10 +10,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Objec
 import { Controller } from '@hotwired/stimulus';
 import Modal from 'bootstrap/js/dist/modal';
 var _default = /*#__PURE__*/function (_Controller) {
-  _inheritsLoose(_default, _Controller);
   function _default() {
     return _callSuper(this, _default, arguments);
   }
+  _inheritsLoose(_default, _Controller);
   return _default;
 }(Controller);
 export { _default as default };

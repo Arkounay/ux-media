@@ -9,10 +9,10 @@ function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.crea
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 import { Controller } from '@hotwired/stimulus';
 var _default = /*#__PURE__*/function (_Controller) {
-  _inheritsLoose(_default, _Controller);
   function _default() {
     return _callSuper(this, _default, arguments);
   }
+  _inheritsLoose(_default, _Controller);
   var _proto = _default.prototype;
   _proto.click = function click() {
     this.inputFileTarget.click();

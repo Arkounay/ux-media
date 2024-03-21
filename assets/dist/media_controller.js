@@ -2,13 +2,13 @@
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : String(i); }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _classPrivateFieldLooseBase(receiver, privateKey) { if (!Object.prototype.hasOwnProperty.call(receiver, privateKey)) { throw new TypeError("attempted to use private field on non-instance"); } return receiver; }
@@ -25,41 +25,41 @@ var _setErrorMessage = /*#__PURE__*/_classPrivateFieldLooseKey("setErrorMessage"
 var _disableCropButton = /*#__PURE__*/_classPrivateFieldLooseKey("disableCropButton");
 var _hideClearButton = /*#__PURE__*/_classPrivateFieldLooseKey("hideClearButton");
 var _default = /*#__PURE__*/function (_Controller) {
-  _inheritsLoose(_default, _Controller);
   function _default() {
     var _this;
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
     _this = _callSuper(this, _default, [].concat(args));
-    Object.defineProperty(_assertThisInitialized(_this), _hideClearButton, {
+    Object.defineProperty(_this, _hideClearButton, {
       value: _hideClearButton2
     });
-    Object.defineProperty(_assertThisInitialized(_this), _disableCropButton, {
+    Object.defineProperty(_this, _disableCropButton, {
       value: _disableCropButton2
     });
-    Object.defineProperty(_assertThisInitialized(_this), _setErrorMessage, {
+    Object.defineProperty(_this, _setErrorMessage, {
       value: _setErrorMessage2
     });
-    Object.defineProperty(_assertThisInitialized(_this), _uploadFiles, {
+    Object.defineProperty(_this, _uploadFiles, {
       value: _uploadFiles2
     });
-    Object.defineProperty(_assertThisInitialized(_this), _toggleProgress, {
+    Object.defineProperty(_this, _toggleProgress, {
       value: _toggleProgress2
     });
-    Object.defineProperty(_assertThisInitialized(_this), _pathUpdateEventListener, {
+    Object.defineProperty(_this, _pathUpdateEventListener, {
       value: _pathUpdateEventListener2
     });
-    Object.defineProperty(_assertThisInitialized(_this), _dragCounter, {
+    Object.defineProperty(_this, _dragCounter, {
       writable: true,
       value: 0
     });
-    Object.defineProperty(_assertThisInitialized(_this), _iframeTriggered, {
+    Object.defineProperty(_this, _iframeTriggered, {
       writable: true,
       value: false
     });
     return _this;
   }
+  _inheritsLoose(_default, _Controller);
   var _proto = _default.prototype;
   _proto.connect = function connect() {
     this.element[this.identifier] = this;
@@ -95,7 +95,7 @@ var _default = /*#__PURE__*/function (_Controller) {
     _classPrivateFieldLooseBase(this, _disableCropButton)[_disableCropButton]();
     _classPrivateFieldLooseBase(this, _hideClearButton)[_hideClearButton](!hasValue);
     if (hasValue) {
-      if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
+      if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg|webp)/i)) {
         var img = document.createElement('img');
         img.src = this.pathValue;
         img.height = 75;
@@ -105,7 +105,7 @@ var _default = /*#__PURE__*/function (_Controller) {
         });
         img.addEventListener('load', function () {
           _this2.imageLoaded = true;
-          _classPrivateFieldLooseBase(_this2, _disableCropButton)[_disableCropButton](!img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|gif)$/i));
+          _classPrivateFieldLooseBase(_this2, _disableCropButton)[_disableCropButton](!img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|webp)$/i));
         });
         this.filePreviewTarget.innerHTML = '';
         this.filePreviewTarget.appendChild(img);
@@ -193,13 +193,12 @@ var _default = /*#__PURE__*/function (_Controller) {
   _proto.dragover = function dragover(event) {
     event.preventDefault();
   };
-  _createClass(_default, [{
+  return _createClass(_default, [{
     key: "fileManagerUrl",
     get: function get() {
       return this.element.dataset.filemanagerUrl;
     }
   }]);
-  return _default;
 }(Controller);
 function _pathUpdateEventListener2(data) {
   this.pathValue = data.detail;

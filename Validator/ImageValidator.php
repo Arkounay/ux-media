@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class ImageValidator extends ConstraintValidator
 {
 
-    public const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
+    public const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
     public function validate($value, Constraint $constraint)
     {
@@ -27,6 +27,7 @@ class ImageValidator extends ConstraintValidator
 
     private function checkExtension(Constraint $constraint, string $path): void
     {
+        $extension = '';
         if ($path = parse_url($path)) {
             $extension = mb_strtolower(pathinfo($path['path'], PATHINFO_EXTENSION));
         }
@@ -37,7 +38,7 @@ class ImageValidator extends ConstraintValidator
             $supportedExtensions = self::SUPPORTED_EXTENSIONS;
         }
 
-        if (!\in_array($extension, $supportedExtensions)) {
+        if (!\in_array($extension, $supportedExtensions, true)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

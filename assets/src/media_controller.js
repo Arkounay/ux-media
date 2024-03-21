@@ -145,7 +145,7 @@ export default class extends Controller {
         this.#disableCropButton();
         this.#hideClearButton(!hasValue);
         if (hasValue) {
-            if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg)/i)) {
+            if (this.pathValue.match(/.(jpg|jpeg|png|gif|svg|webp)/i)) {
                 const img = document.createElement('img');
                 img.src = this.pathValue;
                 img.height = 75;
@@ -155,7 +155,7 @@ export default class extends Controller {
                 });
                 img.addEventListener('load', () => {
                     this.imageLoaded = true;
-                    this.#disableCropButton(!img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|gif)$/i));
+                    this.#disableCropButton(!img.getAttribute('src').match(/^\/.+(jpg|jpeg|png|webp)$/i));
                 });
                 this.filePreviewTarget.innerHTML = '';
                 this.filePreviewTarget.appendChild(img);
