@@ -1,7 +1,7 @@
 {
     "name": "arkounay/ux-media",
     "type": "symfony-bundle",
-    "description": "Collection for Symfony forms",
+    "description": "Async document upload form type using ArtgrisFileManager",
     "keywords": [
         "symfony-ux"
     ],
