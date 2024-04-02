@@ -128,7 +128,9 @@ var _default = /*#__PURE__*/function (_Controller) {
     if (this.hasCropModalTarget) {
       this.cropModalTarget.dataset['arkounay-UxMedia-CropPathValue'] = this.pathValue;
     }
-    var event = new Event('change');
+    var event = new Event('change', {
+      bubbles: true
+    });
     this.inputPathTarget.dispatchEvent(event);
   };
   _proto.openFileManager = function openFileManager() {

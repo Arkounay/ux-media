@@ -186,7 +186,7 @@ export default class extends Controller {
             this.cropModalTarget.dataset['arkounay-UxMedia-CropPathValue'] = this.pathValue;
         }
 
-        const event = new Event('change');
+        const event = new Event('change', { bubbles: true });
         this.inputPathTarget.dispatchEvent(event);
     }
 
