@@ -1,5 +1,4 @@
 {% set collection = form.parent.vars.collection|default(false) %}
-{% apply spaceless %}
     {%- set attr = attr|default([])|merge({
         'class': attr.class|default('ux-media mb-2 border bg-white rounded'),
         'data-controller': attr['data-controller']|default('arkounay--ux-media--media'),
@@ -199,4 +198,4 @@
         </button>
     </div>
     </div>
-{% endapply %}
+
