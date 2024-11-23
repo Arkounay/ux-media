@@ -46,7 +46,7 @@ export default class extends Controller {
 
     #toggleProgress(show) {
         if (show) {
-            this.progressTarget.firstChild.style.width = '0%';
+            this.progressTarget.firstElementChild.style.width = '0%';
             this.progressTarget.classList.remove('d-none');
         } else {
             this.progressTarget.classList.add('d-none');
@@ -100,7 +100,7 @@ export default class extends Controller {
 
             xhr.upload.onprogress = (event) => {
                 const percent = event.loaded / event.total * 100;
-                this.progressTarget.firstChild.style.width = percent + '%';
+                this.progressTarget.firstElementChild.style.width = percent + '%';
             };
 
             xhr.send(data);
