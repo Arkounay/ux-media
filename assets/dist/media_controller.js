@@ -208,7 +208,7 @@ function _pathUpdateEventListener2(data) {
 }
 function _toggleProgress2(show) {
   if (show) {
-    this.progressTarget.firstChild.style.width = '0%';
+    this.progressTarget.firstElementChild.style.width = '0%';
     this.progressTarget.classList.remove('d-none');
   } else {
     this.progressTarget.classList.add('d-none');
@@ -259,7 +259,7 @@ function _uploadFiles2(files) {
     };
     xhr.upload.onprogress = function (event) {
       var percent = event.loaded / event.total * 100;
-      _this4.progressTarget.firstChild.style.width = percent + '%';
+      _this4.progressTarget.firstElementChild.style.width = percent + '%';
     };
     xhr.send(data);
   }
