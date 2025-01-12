@@ -201,7 +201,8 @@ export default class extends Controller {
                 iframeContent.addEventListener('click', function(e) {
                     for (let target = e.target; target && target !== this; target = target.parentNode) {
                         if (target.matches('.select')) {
-                            self.pathValue = target.dataset.path;
+                            // self.pathValue = target.dataset.path;
+                            self.pathValue = target.dataset.path.replace(/%5C/g, '/');
                             self.fileManagerModalTarget.querySelector('.modal-footer button').click();
                             break;
                         }
