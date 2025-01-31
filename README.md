@@ -29,7 +29,7 @@ yarn watch
 This bundles uses [FileManagerBundle](https://github.com/artgris/FileManagerBundle).
 Make sure its routing is enabled, as well as UxMedia routes :
 
-`routing.yaml`:
+`config/routes.yaml`:
 ```yaml
 artgris_file_manager:
     resource: "@ArtgrisFileManagerBundle/Controller"
