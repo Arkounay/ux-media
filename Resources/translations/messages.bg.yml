@@ -1,0 +1,21 @@
+Apply: ‘Приложи’
+Cancel: ‘Отказ’
+Clear: ‘Изчисти’
+Path: ‘Път:’
+File: ‘Файл’
+Add: ‘Добави’
+Close: ‘Затвори’
+File Manager: ‘Файлов мениджър’
+File Upload: ‘Качване на файл’
+Crop: ‘Изрязване’
+Image crop: ‘Изрязване на изображение’
+Width: ‘Ширина’
+Height: ‘Височина’
+Ratio: ‘Пропорция’
+Rotate Left: ‘Завърти наляво’
+Rotate Right: ‘Завърти надясно’
+Horizontal Mirror : ‘Хоризонтално огледално обръщане’
+Vertical Mirror: ‘Вертикално огледално обръщане’
+ux_media.delete: ‘Премахни’
+ux_media.path.placeholder: ‘Няма документ’
+ux_media.alt.placeholder: ‘Няма описание’
