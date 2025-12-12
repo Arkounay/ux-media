@@ -91,6 +91,9 @@ var _default = /*#__PURE__*/function (_Controller) {
     var data = this.cropper.getData();
     var formData = new FormData();
     formData.append('conf', this.conf);
+    if (this.extra) {
+      formData.append('extra', this.extra);
+    }
     formData.append('src', this.pathValue);
     formData.append('x', Math.round(data.x));
     formData.append('y', Math.round(data.y));
