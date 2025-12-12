@@ -34,10 +34,7 @@
                 "main": "dist/bootstrap_modal_controller.js",
                 "webpackMode": "eager",
                 "fetch": "eager",
-                "enabled": false,
-                "autoimport": {
-                    "@arkounay/ux-media/src/bootstrap_modal.scss": true
-                }
+                "enabled": false
             }
         },
         "importmap": {
