@@ -94,10 +94,7 @@ And import the propoer bootstrap scss class :
             },
             "bootstrap_modal": {
                 "enabled": true,
-                "fetch": "eager",
-                "autoimport": {
-                    "@arkounay/ux-media/src/bootstrap_modal.scss": true
-                }
+                "fetch": "eager"
             }
         }
     },
