@@ -30,11 +30,18 @@ class CropController extends AbstractController
         $conf = $post->get('conf');
         $extra = $post->get('extra');
 
+        // Decode extra if it's a JSON string
+        if (is_string($extra) && !empty($extra)) {
+            $extra = json_decode($extra, true) ?? [];
+        } elseif (!is_array($extra)) {
+            $extra = [];
+        }
+
         $fileManager = $this->getParameter('artgris_file_manager');
 
         $destinationFolder = null;
         if ($conf !== null) {
-            $artgrisConf = $this->filemanagerService->getBasePath(['conf' => $conf, 'extra' => $extra ?? []]);
+            $artgrisConf = $this->filemanagerService->getBasePath(['conf' => $conf, 'extra' => $extra]);
             $destinationFolder = $artgrisConf['dir'];
         }
 

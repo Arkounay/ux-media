@@ -89,6 +89,9 @@ export default class extends Controller {
 
         const formData = new FormData();
         formData.append('conf', this.conf);
+        if (this.extra) {
+            formData.append('extra', this.extra);
+        }
         formData.append('src', this.pathValue);
         formData.append('x', Math.round(data.x));
         formData.append('y', Math.round(data.y));
