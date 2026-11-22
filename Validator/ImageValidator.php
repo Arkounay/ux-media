@@ -10,7 +10,7 @@ class ImageValidator extends ConstraintValidator
 
     public const SUPPORTED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'];
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (null === $value) {
             return;
