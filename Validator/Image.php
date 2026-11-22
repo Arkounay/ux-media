@@ -16,7 +16,7 @@ class Image extends Constraint
     public function __construct(
         public string $message = 'ux_media_validation.image',
         public array $supportedExtensions = ImageValidator::SUPPORTED_EXTENSIONS,
-        array $groups = null,
+        ?array $groups = null,
         mixed $payload = null,
     ) {
         parent::__construct([], $groups, $payload);
