@@ -6,6 +6,7 @@
         "symfony-ux"
     ],
     "license": "MIT",
+    "abandoned": "liveux/file-manager-bundle",
     "authors": [
         {
             "name": "Antonin M",
