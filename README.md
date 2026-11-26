@@ -1,3 +1,5 @@
+# For new symfony projects, use https://github.com/LiveUX/file-manager-bundle instead
+
 # Ux Media
 
 Symfony UX async document upload form type using ArtgrisFileManager, a [MediaBundle](https://github.com/artgris/MediaBundle) version that works without having to use most of its dependecies like jQuery / jQuery UI / Font awesome etc (but **still requires bootstrap 5**)
